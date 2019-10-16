@@ -1,7 +1,7 @@
 <!DOCTYPE html> 
 <html> 
 <head> 
-	<title>Project Title</title> 
+	<title>Automated Classification of Students</title> 
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
@@ -10,6 +10,25 @@
 <style type="text/css">
 	#preloader {position: fixed;top: 0;left: 0;right: 0;bottom: 0;background-color: #fff;z-index: 99;}
 	#status {position: fixed;left: 0px;top: 0px;background:url('https://i.imgur.com/gvmdEsV.gif')no-repeat center center;background-size: 100px;width: 100%;height: 100%;z-index: 1000;overflow: visible;}
+	h1{
+		padding-top: 50px;
+		padding-bottom: 50px;
+	}
+	img{
+		height: 500px !important;
+		width: 200px !important;
+	}
+	.menu .item{
+		height: 350px;
+	}
+	.faq{
+		text-align: right;
+		padding-top: 50px;
+		padding-right: 400px;
+		color: dodgerblue;
+		font-weight: bold;
+	}
+
 </style>
 
 <script type="text/javascript">
@@ -20,15 +39,32 @@
 })
 </script>
 
+
 <body>
 	<div id="preloader">
 	  	<div id="status">&nbsp;</div>
 	</div>  
-	<div class="container">
-
-	
-		<h1 style="text-align:center;color:blue;"> Project Title </h1> 
-	<form action="{{url_for('success')}}" method="POST">
+	<div class="container" id="my_form">
+		<div class="faq">
+		<div class="ui dropdown">
+		<div class="text">FAQ</div>
+			<div class="menu">
+				<div class="item">
+					<h6>[Grade Level Directory] ← This is the input directory</h6>
+					<h6>===> [Section Directory]</h6>
+					<h6>======> Boys [Folder]</h6>
+					<h6>=========> [SF10 - Student File in Excel format (1)]</h6>
+					<h6>=========> [SF10 - Student File in Excel format (n)]</h6>
+					<h6>======> Girls [Folder]</h6>
+					<h6>=========> [SF10 - Student File in Excel format (1)]</h6>
+					<h6>=========> [SF10 - Student File in Excel format (n)]</h6>
+					<h6>===> [Section Directory (n)]</h6>
+				</div>
+			</div>
+		</div>
+		</div>
+		<h1 style="text-align:center;color:blue;">Automated Classification of Students</h1> 
+	<form action="{{url_for('success')}}" id="id" method="POST">
 		<div class="container">
 		<div class="row">
 			<div class="ui two column centered grid">
@@ -70,49 +106,57 @@
 					</select>
 			    </div>
 			  </div>
-			  <div class="six column centered row">
+			  <div class="two column centered row">
 			    <div class="column">
 			    	<div class="ui fluid input">
 			  			<input type="number" name="number_of_students" placeholder="Number of Student per Section">
 					</div>
 			    </div>
-			    <div class="column">
-			    	<div class="ui fluid input">
-			  			<input type="number" placeholder="Cell of Average">
-					</div>
-			    </div>
-			    <div class="column">
-			    	<div class="ui fluid input">
-			  			<input type="number" placeholder="Cell of Math">
-					</div>
-			    </div>
 			  </div>
-			  <div class="four column centered row">
-			  	 <div class="column">
-			    	<div class="ui fluid input">
-			  			<input type="number" placeholder="Cell of English">
-					</div>
-			    </div>
-			    <div class="column">
-			    	<div class="ui fluid input">
-			  			<input type="number" placeholder="Cell of Science">
-					</div>
-			    </div>
-			  </div>
-			
+
 			<div class="two column centered row">
-				<button class="positive ui button">Execute</button>
+				<div class="column">
+					<button id="btn" class="positive ui button" onclick="loading()">Execute</button>
+				</div>
 			</div>
+			<div class="two column centered row">
+				<div class="column">
+					<button id="btn1" class="positive ui button" style="display: none;" disabled>Loading.....</button>
+				<div class="column">
 			</div>
-</form>
-</div>
+		</div>
+		</div>
+		</div>
+	</form>
+	</div>
+	<div>
+		{% if name == true %}
+		<h1>Jomar</h1>
+		{% endif %}
+	</div>
 
 <script type="text/javascript">
 	$('.ui.dropdown')
   .dropdown();
 </script>
-			
-	 
+
+<script type="text/javascript">
+	function loading(){
+		document.getElementById("btn").style.display = "none";
+		document.getElementById("btn1").style.display = "block";
+		// document.getElementById('id')[0].submit();
+		 // Form submission
+	}
+</script>
+
+<!-- <script type="text/javascript">
+	$('#id').submit(function(e){
+    $(this).children('button[id=submit]').attr('disabled', 'disabled');
+    // this is just for demonstration
+    e.preventDefault(); 
+    return false;
+});
+</script>	 -->	 
 </body> 
 
 </html> 
